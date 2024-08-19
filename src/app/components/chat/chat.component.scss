@@ -1,0 +1,18 @@
+/* Hide scrollbar but allow scrolling */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Optional: for a smoother appearance */
+  }
+  
+  /* For all other browsers */
+  .flex-1 {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  /* Remove scrollbar on the container */
+  .flex-1 {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  }
+  

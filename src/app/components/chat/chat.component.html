@@ -1,0 +1,38 @@
+<div class="flex flex-col h-96 p-4">
+    <div class="border-b border-gray-200">
+        <div class="flex items-center mb-4">
+            <button class="focus:outline-none" (click)="goBack()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                    </path>
+                </svg>
+            </button>
+            <h1 class="ml-4 text-lg font-semibold">Chat</h1>
+        </div>
+    </div>
+    <div class="flex-1 overflow-y-scroll mt-2">
+        @for (message of messages; track $index) {
+        <div class="flex"
+            [ngClass]="{'justify-end': message.sender == currentUserId, 'justify-start': message.sender != currentUserId}">
+            <div [ngClass]="{
+                            'bg-green-500 text-white rounded-bl-2xl rounded-tl-2xl rounded-tr-sm': message.sender == currentUserId,
+                            'bg-white text-gray-900 rounded-br-2xl rounded-tr-2xl rounded-tl-sm border border-gray-300': message.sender != currentUserId
+                        }" class="p-3 max-w-xs shadow-sm text-sm">
+                <p>{{ message.content }}</p>
+                <span class="text-xs mt-1 block text-right"
+                    [ngClass]="{'text-gray-200': message.sender == currentUserId, 'text-gray-500': message.sender != currentUserId}">
+                    {{message.createdAt | date:'shortTime'}}
+                </span>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="flex items-center p-4 rounded-lg">
+        <input [(ngModel)]="message" type="text" class="flex-1 p-2 mr-2 border border-gray-300 rounded-lg"
+            placeholder="Type a message..." />
+        <button (click)="sendMessage()" class="p-2 bg-blue-500 text-white rounded-lg">
+            Send
+        </button>
+    </div>
+</div>
